@@ -172,6 +172,7 @@ namespace dnGREP.Common
             public const string FollowSymlinks = "FollowSymlinks";
             public const string MainWindowState = "MainWindowState";
             public const string MainWindowBounds = "MainWindowBounds";
+            public const string OptionsBounds = "OptionsBounds";
             public const string ReplaceBounds = "ReplaceBounds";
             public const string PreviewBounds = "PreviewBounds";
             public const string PreviewWindowState = "PreviewWindowState";
@@ -349,6 +350,8 @@ namespace dnGREP.Common
             public const string SearchAutoPauseCount = "SearchAutoPauseCount";
             [DefaultValue(true)]
             public const string AutoCompleteEnabled = "AutoCompleteEnabled";
+            [DefaultValue(FocusElement.ResultsTree)]
+            public const string SetFocusElement = "SetFocusElement";
         }
 
         public static class ObsoleteKey

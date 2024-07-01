@@ -7,8 +7,8 @@
                  xmlns:my="clr-namespace:dnGREP.WPF"
                  mc:Ignorable="d"
                  Title="{l:Loc Key='Options_OptionsTitle'}"
-                 Height="600"
                  MinWidth="500"
+                 MinHeight="300"
                  d:DesignHeight="3400"
                  FlowDirection="{Binding CultureFlowDirection}"
                  FontFamily="{Binding ApplicationFontFamily}"
@@ -16,8 +16,9 @@
                  my:DiginesisHelpProvider.HelpKeyword="Options"
                  my:DiginesisHelpProvider.HelpNavigator="Topic"
                  my:DiginesisHelpProvider.ShowHelp="True"
-                 ResizeMode="NoResize"
+                 ResizeMode="CanResize"
                  SizeToContent="Width"
+                 my:ChromeButtonExtension.ButtonVisibility="MinimizeHidden"
                  Background="{DynamicResource Dialog.Background}"
                  CaptionBackground="{DynamicResource Caption.Dialog.Background}"
                  Icon="/dnGREP;component/nGREP.ico"
@@ -81,7 +82,7 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="0" PanningMode="VerticalOnly">
+        <ScrollViewer Grid.Row="0" PanningMode="Both" HorizontalScrollBarVisibility="Auto">
             <StackPanel HorizontalAlignment="Stretch">
 
                 <GroupBox Header="{l:Loc Key='Options_StartupOptions'}">
@@ -557,6 +558,7 @@
                                 </TextBox.Width>
                             </TextBox>
                         </Grid>
+                        
                         <Label Content="{l:Loc Key='Options_MaximumNumberOfParallelSearches'}"/>
                         <StackPanel Orientation="Horizontal">
                             <Slider Width="250" HorizontalAlignment="Left"
@@ -566,6 +568,16 @@
                                     Value="{Binding ParallelismCount}"/>
                             <CheckBox Margin="12,0" Content="{l:Loc Key='Options_NoFixedLimit'}"
                                       IsChecked="{Binding ParallelismUnlimited}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="{l:Loc Key='Options_SetKeyboardFocusTo'}"/>
+                            <RadioButton Content="{l:Loc Key='Options_FocusResultsTree'}" 
+                                         Margin="18,3" GroupName="FocusElement"
+                                         IsChecked="{Binding FocusElement, Converter={StaticResource ebc}, ConverterParameter=ResultsTree}" />
+                            <RadioButton Content="{l:Loc Key='Options_FocusSearchFor'}" 
+                                         Margin="18,3" GroupName="FocusElement"
+                                         IsChecked="{Binding FocusElement, Converter={StaticResource ebc}, ConverterParameter=SearchFor}" />
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
@@ -587,8 +599,7 @@
                                       IsChecked="{Binding Path=ShowLinesInContext}" 
                                       Content="{l:Loc Key='Options_ShowResultLinesInContext'}"/>
                             <TextBox Margin="3,0,0,0"
-                                     Text="{Binding Path=ContextLinesBefore, UpdateSourceTrigger=PropertyChanged}"
-                                     IsEnabled="{Binding ElementName=cbShowContext, Path=IsChecked}">
+                                     Text="{Binding Path=ContextLinesBefore, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.Width>
                                     <MultiBinding Converter="{StaticResource TextBoxWidthConverter}" ConverterParameter="32" FallbackValue="32">
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"/>
@@ -598,8 +609,7 @@
                                 </TextBox.Width>
                             </TextBox>
                             <Label Content="{l:Loc Key='Options_ContextBeforeAnd'}" />
-                            <TextBox Text="{Binding Path=ContextLinesAfter, UpdateSourceTrigger=PropertyChanged}"
-                                     IsEnabled="{Binding ElementName=cbShowContext, Path=IsChecked}">
+                            <TextBox Text="{Binding Path=ContextLinesAfter, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.Width>
                                     <MultiBinding Converter="{StaticResource TextBoxWidthConverter}" ConverterParameter="32" FallbackValue="32">
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"/>
